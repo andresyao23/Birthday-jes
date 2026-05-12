@@ -1156,7 +1156,7 @@
             document.body.appendChild(s); setTimeout(function() { s.remove(); }, 600);
         });
 
-        var datetxt = "15 May"; var charArr = datetxt.split(''); var dateIdx = 0; var dateSpan = document.querySelector(".date__of__birth span");
+        var datetxt = ""; var charArr = datetxt.split(''); var dateIdx = 0; var dateSpan = document.querySelector(".date__of__birth span");
         setTimeout(function() {
             var dateInterval = setInterval(function() {
                 if (dateIdx < charArr.length) { dateSpan.textContent += charArr[dateIdx]; dateIdx++; }
@@ -1387,7 +1387,7 @@
                 /* ════════════════════════════
            EFEK MENGETIK (Surat) - DIPERBAIKI DOUBLE TEXT
         ════════════════════════════ */
-        var letterText = "姐 \n\n生日快乐 因为有你，这个世界变得更加有意义.\n\n自从认识你以来，一切都变了。那些曾经平凡的小事，如今都变得格外珍贵.你不需要完美——因为你现在的样子，无论优点还是缺点，都已足够让我心动.\n\n我无法承诺给你一切，但我承诺我会努力成为你值得拥有的人.\n\n最后，再偷偷说一句：如果未来的某一天，你也刚好注意到了我，那一定会是我最幸运的事情。祝你生日快乐，天天开心，永远幸福\n\n祝你生日快乐，Jes。你值得拥有世间所有的幸福。";
+        var letterText = " \n\n生日快乐 因为有你，这个世界变得更加有意义.\n\n自从认识你以来，一切都变了。那些曾经平凡的小事，如今都变得格外珍贵.你不需要完美——因为你现在的样子，无论优点还是缺点，都已足够让我心动.\n\n我无法承诺给你一切，但我承诺我会努力成为你值得拥有的人.\n\n最后，再偷偷说一句：如果未来的某一天，你也刚好注意到了我，那一定会是我最幸运的事情。祝你生日快乐，天天开心，永远幸福\n\n祝你生日快乐，Jes。你值得拥有世间所有的幸福。";
         
         var typedEl = document.getElementById('typed-text');
         var typingStarted = false;
