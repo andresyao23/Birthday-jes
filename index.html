@@ -1367,18 +1367,46 @@
         var timelineObserver = new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('vis'); }); }, { threshold: 0.2 });
         timelineItems.forEach(function(el) { timelineObserver.observe(el); });
 
-        /* ════════════════════════════
-           EFEK MENGETIK (Surat)
+                /* ════════════════════════════
+           EFEK MENGETIK (Surat) - DIPERBAIKI DOUBLE TEXT
         ════════════════════════════ */
         var letterText = "嗨姐 \n\n生日快乐 因为有你，这个世界变得更加有意义.\n\n自从认识你以来，一切都变了。那些曾经平凡的小事，如今都变得格外珍贵.你不需要完美——因为你现在的样子，无论优点还是缺点，都已足够让我心动.\n\n我无法承诺给你一切，但我承诺我会努力成为你值得拥有的人.\n\n最后，再偷偷说一句：如果未来的某一天，你也刚好注意到了我，那一定会是我最幸运的事情。祝你生日快乐，天天开心，永远幸福\n\n祝你生日快乐，Jes。你值得拥有世间所有的幸福。";
-        var typedEl = document.getElementById('typed-text'); var typingStarted = false; var typeIdx = 0;
+        
+        var typedEl = document.getElementById('typed-text');
+        var typingStarted = false;
+        var typeIdx = 0;
+
+        // Buat elemen penampung teks dan kursor secara terpisah agar tidak innerHTML glitch
+        var textSpan = document.createElement('span');
+        typedEl.appendChild(textSpan);
+        
+        var cursorSpan = document.createElement('span');
+        cursorSpan.className = 'cursor';
+        typedEl.appendChild(cursorSpan);
+
         function typeChar() {
-            if (typeIdx >= letterText.length) return; var ch = letterText[typeIdx]; var cursor = typedEl.querySelector('.cursor'); if (cursor) cursor.remove();
-            if (ch === '\n') { typedEl.innerHTML += '<br>'; } else { typedEl.innerHTML += ch; }
-            typedEl.innerHTML += '<span class="cursor"></span>'; typeIdx++;
-            var delay = ch === '.' || ch === ',' ? 110 : ch === '\n' ? 180 : 22 + Math.random() * 16; setTimeout(typeChar, delay);
+            if (typeIdx >= letterText.length) return;
+            var ch = letterText[typeIdx];
+            
+            if (ch === '\n') {
+                textSpan.appendChild(document.createElement('br'));
+            } else {
+                textSpan.appendChild(document.createTextNode(ch));
+            }
+            
+            typeIdx++;
+            var delay = ch === '.' || ch === ',' ? 110 : ch === '\n' ? 180 : 22 + Math.random() * 16;
+            setTimeout(typeChar, delay);
         }
-        var letterObserver = new IntersectionObserver(function(entries) { if (entries[0].isIntersecting && !typingStarted) { typingStarted = true; setTimeout(typeChar, 400); } }, { threshold: 0.3 });
+
+        var letterObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !typingStarted) {
+                    typingStarted = true;
+                    setTimeout(typeChar, 400);
+                }
+            });
+        }, { threshold: 0.3 });
         letterObserver.observe(document.getElementById('letter'));
 
         /* ════════════════════════════
