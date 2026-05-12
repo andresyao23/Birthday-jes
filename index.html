@@ -617,7 +617,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden; background: var(--warm-bg); color: var(--text-soft);
+            overflow-x: hidden; /* Mencegah scroll ke samping */
+            background: var(--warm-bg); color: var(--text-soft);
         }
 
         body::before {
@@ -664,7 +665,7 @@
         .happy span, .birthday span { display: inline-block; }
 
         .hat { position: absolute; top: -40px; right: -20px; animation: hatBounce 3s ease-in-out infinite; transform-origin: bottom center; }
-        .hat img { filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); }
+        .hat img { filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); width: 90px; } /* Diperkecil default */
         @keyframes hatBounce { 0%, 100% { transform: rotate(-5deg) translateY(0); } 50% { transform: rotate(5deg) translateY(-10px); } }
 
         .date__of__birth { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: var(--gold-light); letter-spacing: 3px; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; opacity: 0; }
@@ -697,7 +698,7 @@
 
         .balloon_one, .balloon_two { position: absolute; z-index: 3; animation: balloonFloat 4s ease-in-out infinite; }
         .balloon_one { top: -30px; left: -60px; } .balloon_two { top: -20px; right: -60px; animation-delay: 1s; }
-        .balloon_one img, .balloon_two img { filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); }
+        .balloon_one img, .balloon_two img { filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); width: 100px; }
         @keyframes balloonFloat { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
 
         .cricle { position: absolute; width: 390px; height: 390px; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
@@ -735,7 +736,9 @@
         .timeline-item.right .timeline-content { text-align: left; padding-left: 70px; padding-right: 0; transform: translateX(40px); }
         .timeline-item.vis .timeline-content { opacity: 1; transform: translateX(0); }
         .timeline-year { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 70px; height: 70px; background: var(--warm-bg); border: 2px solid var(--rose-500); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--gold-light); z-index: 5; box-shadow: 0 0 20px rgba(244, 63, 94, 0.3); }
-        .timeline-img { width: calc(100% + 70px); aspect-ratio: 6 / 6; border-radius: 1.2rem; overflow: hidden; position: relative; margin-bottom: 1.2rem; box-shadow: 0 15px 40px rgba(0,0,0,0.4); border: 3px solid rgba(255,255,255,0.05); transition: transform .4s, box-shadow .4s; }
+        
+        /* Rasio 4/5 agar wajah presisi tidak terpotong */
+        .timeline-img { width: calc(100% + 70px); aspect-ratio: 4 / 5; border-radius: 1.2rem; overflow: hidden; position: relative; margin-bottom: 1.2rem; box-shadow: 0 15px 40px rgba(0,0,0,0.4); border: 3px solid rgba(255,255,255,0.05); transition: transform .4s, box-shadow .4s; }
         .timeline-item .timeline-img { margin-right: -70px; }
         .timeline-item.right .timeline-img { margin-left: -70px; margin-right: 0; }
         .timeline-img:hover { transform: scale(1.03); box-shadow: 0 20px 50px rgba(244,63,94,.25); }
@@ -744,13 +747,6 @@
         .timeline-img::after { content: ''; position: absolute; inset: 0; border-radius: 1.2rem; background: linear-gradient(to top, rgba(26,10,14,.7) 0%, transparent 50%); }
         .timeline-tag { font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--rose-300); margin-bottom: 0.4rem; }
         .timeline-text { font-size: 0.9rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
-
-        @media (max-width: 768px) {
-            .timeline-line { left: 20px; } .timeline-item { width: 100%; padding-left: 60px; justify-content: flex-start; padding-bottom: 3rem; } .timeline-item.right { margin-left: 0; }
-            .timeline-content { width: 100%; text-align: left; padding-right: 0; padding-left: 0; transform: translateX(30px); } .timeline-item.right .timeline-content { transform: translateX(30px); padding-left: 0; }
-            .timeline-year { left: 20px; transform: translateX(-50%); width: 50px; height: 50px; font-size: 0.9rem; }
-            .timeline-item .timeline-img, .timeline-item.right .timeline-img { width: 100%; margin-left: 0; margin-right: 0; }
-        }
 
         .gallery-wrap { max-width: 940px; margin: 0 auto; padding: 5rem 2rem; }
         .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: .8rem; }
@@ -770,8 +766,8 @@
         .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.92); backdrop-filter: blur(12px); z-index: 150; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
         .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox img, .lightbox video { max-width: 88vw; max-height: 72vh; border-radius: 1rem; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
-        .lightbox-caption { color: var(--gold-light); font-family: 'Playfair Display', serif; font-style: italic; margin-top: 1.5rem; font-size: 1rem; }
-        .lightbox-close { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); color: var(--fg); width: 44px; height: 44px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: background .3s, transform .3s; display: flex; align-items: center; justify-content: center; }
+        .lightbox-caption { color: var(--gold-light); font-family: 'Playfair Display', serif; font-style: italic; margin-top: 1.5rem; font-size: 1rem; padding: 0 1rem; text-align: center; }
+        .lightbox-close { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: background .3s, transform .3s; display: flex; align-items: center; justify-content: center; }
         .lightbox-close:hover { background: rgba(255,255,255,.2); transform: scale(1.1); }
 
         .cake-wrap { padding: 5rem 2rem; text-align: center; }
@@ -807,7 +803,7 @@
         footer { text-align: center; padding: 3rem 2rem; color: var(--text-dim); font-size: .8rem; position: relative; z-index: 2; }
         footer .hb { color: var(--rose-500); display: inline-block; animation: heartBeat 1.4s ease-in-out infinite; }
 
-        .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120px); background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); color: var(--text-soft); padding: .85rem 1.8rem; border-radius: 1rem; font-size: .9rem; z-index: 200; transition: transform .55s cubic-bezier(.175,.885,.32,1.275); white-space: nowrap; }
+        .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120px); background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); color: var(--text-soft); padding: .85rem 1.8rem; border-radius: 1rem; font-size: .9rem; z-index: 200; transition: transform .55s cubic-bezier(.175,.885,.32,1.275); white-space: nowrap; max-width: 90vw; text-align: center; }
         .toast.show { transform: translateX(-50%) translateY(0); }
 
         .decorate_star { position: fixed; width: 4px; height: 4px; background: var(--gold-light); border-radius: 50%; opacity: 0; animation: starFloat linear infinite; pointer-events: none; z-index: 1; }
@@ -830,18 +826,59 @@
         .music-btn.playing i { animation: spin 3s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+
+        /* ══════════════════════════════════════
+           RESPONSIVE MOBILE DESIGN (TABLET)
+        ══════════════════════════════════════ */
         @media (max-width: 768px) {
-            .hero-content { flex-direction: column; gap: 40px; } .hero-left, .hero-right { min-width: unset; width: 100%; }
-            .image { width: 260px; height: 260px; } .cricle { width: 310px; height: 310px; } .text__cricle span { font-size: .95rem; transform-origin: 0 155px; }
-            .photo-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-            .photo-item:nth-child(1) { grid-row: span 2; } .photo-item.video-item { grid-column: span 2; grid-row: span 2; }
-            .balloon_one img, .balloon_two img { width: 80px !important; }
+            .hero-content { flex-direction: column; gap: 40px; }
+            .hero-left, .hero-right { min-width: unset; width: 100%; }
+            .image { width: 260px; height: 260px; }
+            .cricle { width: 310px; height: 310px; }
+            .text__cricle span { font-size: .9rem; transform-origin: 0 155px; }
+            .balloon_one img, .balloon_two img { width: 70px !important; }
+            .hat img { width: 80px; }
+            
+            .photo-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+            .photo-item:nth-child(1) { grid-row: span 2; }
+            .photo-item.video-item { grid-column: span 2; grid-row: span 2; }
+
+            .timeline-line { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 60px; justify-content: flex-start; padding-bottom: 3rem; }
+            .timeline-item.right { margin-left: 0; }
+            .timeline-content { width: 100%; text-align: left; padding-right: 0; padding-left: 0; transform: translateX(30px); }
+            .timeline-item.right .timeline-content { transform: translateX(30px); padding-left: 0; }
+            .timeline-year { left: 20px; transform: translateX(-50%); width: 45px; height: 45px; font-size: 0.85rem; }
+            .timeline-item .timeline-img, .timeline-item.right .timeline-img {
+                width: 100%; margin-left: 0; margin-right: 0; aspect-ratio: 3/4; /* Rasio disesuaikan agar tidak terlalu tinggi di HP */
+            }
+
             .music-btn { bottom: 1.5rem; right: 1.5rem; width: 46px; height: 46px; font-size: 1rem; }
         }
+
+        /* ══════════════════════════════════════
+           RESPONSIVE MOBILE DESIGN (HP KECIL)
+        ══════════════════════════════════════ */
         @media (max-width: 480px) {
-            .image { width: 220px; height: 220px; } .cricle { width: 270px; height: 270px; } .text__cricle span { transform-origin: 0 135px; }
-            .photo-grid { grid-auto-rows: 160px; } .photo-item.video-item { grid-row: span 2; }
-            .happy { font-size: 2.5rem; } .birthday { font-size: 3rem; } #btn__scroll { padding: 14px 30px; } .mail { font-size: .9rem; } .glass-card { padding: 1.5rem; }
+            .image { width: 220px; height: 220px; }
+            .cricle { width: 270px; height: 270px; }
+            .text__cricle span { transform-origin: 0 135px; font-size: .85rem; }
+            
+            /* Sembunyikan balon agar tidak menutupi foto di HP kecil */
+            .balloon_one, .balloon_two { display: none; }
+            .hat img { width: 65px; }
+            
+            .photo-grid { grid-auto-rows: 140px; gap: .5rem; }
+            .photo-item.video-item { grid-row: span 2; }
+            
+            .happy { font-size: 2.5rem; }
+            .birthday { font-size: 3rem; }
+            #btn__scroll { padding: 14px 30px; }
+            .mail { font-size: .9rem; }
+            .glass-card { padding: 1.2rem; }
+            
+            .typed-text { font-size: 0.9rem; line-height: 1.8; }
+            .timeline-text { font-size: 0.85rem; }
         }
 
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
@@ -849,30 +886,26 @@
 </head>
 
 <body>
-    <!-- ══ AUDIO ELEMENT (Diletakkan di BODY, bukan di STYLE) ══ -->
     <audio id="bg-music" loop preload="auto">
         <source src="Nuan -nuan.mp3" type="audio/mpeg">
     </audio>
 
     <canvas id="confetti-canvas"></canvas>
-
     <div class="bokeh-layer" id="bokehLayer"></div>
     <div class="petal-layer" id="petalLayer"></div>
     <div class="heart-particle-layer" id="heartLayer"></div>
 
-    <!-- ══ TOMBOL MUSIK ══ -->
     <div class="music-btn" id="music-btn" title="Play/Pause Music">
         <i class="fa-solid fa-music"></i>
     </div>
 
-    <!-- ════════ HERO ════════ -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-left">
                 <div class="title">
                     <h1 class="happy"><span>H</span><span>a</span><span>p</span><span>p</span><span>y</span></h1>
                     <h1 class="birthday"><span>B</span><span>i</span><span>r</span><span>t</span><span>h</span><span>d</span><span>a</span><span>y</span></h1>
-                    <div class="hat"><img src="./images/hat.png" alt="" width="130"></div>
+                    <div class="hat"><img src="./images/hat.png" alt=""></div>
                 </div>
                 <div class="date__of__birth"><span></span></div>
                 <div class="scroll-btn" id="scrollBtn">
@@ -883,8 +916,8 @@
             </div>
             <div class="hero-right">
                 <div class="box__account">
-                    <div class="balloon_one"><img width="100px" src="./images/balloon1.png" alt=""></div>
-                    <div class="balloon_two"><img width="100px" src="./images/balloon2.png" alt=""></div>
+                    <div class="balloon_one"><img src="./images/balloon1.png" alt=""></div>
+                    <div class="balloon_two"><img src="./images/balloon2.png" alt=""></div>
                     <div class="image"><img src="images/Jelsyn9.jpeg" alt="Jeslyn"></div>
                     <div class="name"><i class="fa-solid fa-heart"></i><span>Dear Jeslyn</span><i class="fa-solid fa-heart"></i></div>
                 </div>
@@ -902,7 +935,6 @@
         </div>
     </section>
 
-    <!-- ════════ LOVE LETTER ════════ -->
     <section id="letter">
         <div class="letter-wrap">
             <div class="reveal"><h2 class="sec-title">-心意-</h2></div>
@@ -912,7 +944,6 @@
         </div>
     </section>
 
-    <!-- ════════ FLASHBACK TIMELINE ════════ -->
     <section id="reasons">
         <div class="timeline-wrap">
             <div class="reveal">
@@ -920,10 +951,8 @@
                 <h2 class="sec-title">生日时刻</h2>
                 <p class="sec-sub">perjalanan indah yang sudah mu lalui</p>
             </div>
-            
             <div class="timeline-container">
                 <div class="timeline-line"></div>
-                
                 <div class="timeline-item">
                     <div class="timeline-year">2021</div>
                     <div class="timeline-content">
@@ -932,7 +961,6 @@
                         <p class="timeline-text">Masa-masa pertama kita kenal. Siapa sangka obrolan random ini bakal jadi cerita yang bikin aku ketagihan sampai sekarang.</p>
                     </div>
                 </div>
-
                 <div class="timeline-item right">
                     <div class="timeline-year">2022</div>
                     <div class="timeline-content">
@@ -941,7 +969,6 @@
                         <p class="timeline-text">Siapa sangka ternyata kita bisa kenal dari kerupuk emping your mom,ternyata bawa rejeki ku buat bisa kenal denganmu, HAHAHAHA.</p>
                     </div>
                 </div>
-
                 <div class="timeline-item">
                     <div class="timeline-year">2023</div>
                     <div class="timeline-content">
@@ -950,7 +977,6 @@
                         <p class="timeline-text">Tidak expect kalau kamu orangnya sangat aktif yang awalnya ku kira mu pendiam ternyata waw tapi bisa membuat ku nyaman ketika sedang bersamamu.</p>
                     </div>
                 </div>
-
                 <div class="timeline-item right">
                     <div class="timeline-year">2024</div>
                     <div class="timeline-content">
@@ -959,7 +985,6 @@
                         <p class="timeline-text">Suka maupun duka, minum matcha maru, tunggu ice cream di bluefire , kepedasan makan ma la. walaupun itu semua duka ya wkwkw tapi jujur lucu banget</p>
                     </div>
                 </div>
-
                 <div class="timeline-item">
                     <div class="timeline-year">2025</div>
                     <div class="timeline-content">
@@ -968,12 +993,10 @@
                         <p class="timeline-text">Di tahun ini, aku cuma mau ngasih tau: aku bersyukur banget bisa kenal denganmu. dunia ku sekarang lebih berwarna asekk, Happy birthday!</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ════════ GALLERY ════════ -->
     <section id="gallery">
         <div class="gallery-wrap">
             <div class="reveal">
@@ -1007,7 +1030,6 @@
         </div>
     </section>
 
-    <!-- ════════ CAKE ════════ -->
     <section id="cake">
         <div class="cake-wrap">
             <div class="reveal">
@@ -1029,7 +1051,6 @@
         </div>
     </section>
 
-    <!-- ════════ QUOTE ════════ -->
     <section id="quote">
         <div class="quote-wrap reveal">
             <span class="quote-mark">"</span>
@@ -1038,7 +1059,6 @@
         </div>
     </section>
 
-    <!-- ════════ FINALE ════════ -->
     <section id="finale">
         <div class="finale">
             <div class="reveal">
@@ -1054,15 +1074,178 @@
         <p>Dibuat dengan <span class="hb"><i class="fa-solid fa-heart"></i></span> khusus untuk Jeslyn</p>
     </footer>
 
-    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close" id="lightbox-close" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
         <div id="lightbox-media"></div>
         <p class="lightbox-caption" id="lightbox-caption"></p>
     </div>
 
-    <!-- Toast -->
     <div class="toast" id="toast"></div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        var bgMusic = document.getElementById('bg-music');
+        var musicBtn = document.getElementById('music-btn');
+        var isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+            } else {
+                bgMusic.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(error => {
+                    console.log("Autoplay blocked by browser");
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+
+        musicBtn.addEventListener('click', toggleMusic);
+
+        document.getElementById('btn__scroll').addEventListener('click', function() {
+            if (!isPlaying) {
+                bgMusic.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    isPlaying = true;
+                }).catch(e => {});
+            }
+        });
+
+        (function() {
+            var layer = document.getElementById('bokehLayer');
+            var colors = ['rgba(244,63,94,0.12)','rgba(212,165,116,0.08)','rgba(253,164,175,0.1)','rgba(232,201,160,0.06)','rgba(225,29,72,0.07)'];
+            for (var i = 0; i < 8; i++) {
+                var b = document.createElement('div'); b.className = 'bokeh'; var size = Math.random() * 200 + 100;
+                b.style.width = size + 'px'; b.style.height = size + 'px'; b.style.left = Math.random() * 100 + '%';
+                b.style.background = colors[Math.floor(Math.random() * colors.length)];
+                b.style.animationDuration = (Math.random() * 15 + 12) + 's'; b.style.animationDelay = (Math.random() * 8) + 's';
+                layer.appendChild(b);
+            }
+        })();
+
+        (function() {
+            var layer = document.getElementById('petalLayer');
+            for (var i = 0; i < 25; i++) {
+                var p = document.createElement('div'); p.className = 'petal'; p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 8 + 7) + 's'; p.style.animationDelay = (Math.random() * 10) + 's'; p.style.opacity = 0;
+                layer.appendChild(p);
+            }
+        })();
+
+        (function() {
+            var layer = document.getElementById('heartLayer');
+            var heartColors = ['#fb7185','#fda4af','#fecdd3','#e8c9a0','#f43f5e'];
+            for (var i = 0; i < 12; i++) {
+                var h = document.createElement('div'); h.className = 'heart-particle'; h.innerHTML = '\u2665';
+                h.style.left = Math.random() * 100 + '%'; h.style.fontSize = (Math.random() * 10 + 6) + 'px';
+                h.style.animationDuration = (Math.random() * 10 + 8) + 's'; h.style.animationDelay = (Math.random() * 12) + 's';
+                h.style.color = heartColors[Math.floor(Math.random() * heartColors.length)]; layer.appendChild(h);
+            }
+        })();
+
+        var sparkleThrottle = 0;
+        document.addEventListener('mousemove', function(e) {
+            var now = Date.now(); if (now - sparkleThrottle < 50) return; sparkleThrottle = now;
+            var s = document.createElement('div'); s.className = 'sparkle'; s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px';
+            var sparkleColors = ['#fda4af','#fecdd3','#e8c9a0','#fb7185','#fff'];
+            s.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+            document.body.appendChild(s); setTimeout(function() { s.remove(); }, 600);
+        });
+
+        var datetxt = "15 May"; var charArr = datetxt.split(''); var dateIdx = 0; var dateSpan = document.querySelector(".date__of__birth span");
+        setTimeout(function() {
+            var dateInterval = setInterval(function() {
+                if (dateIdx < charArr.length) { dateSpan.textContent += charArr[dateIdx]; dateIdx++; }
+                else { var dob = document.querySelector('.date__of__birth'); if (dob.querySelectorAll('i').length === 0) { var i1 = document.createElement("i"); i1.className = "fa-solid fa-star"; dob.prepend(i1); var i2 = document.createElement("i"); i2.className = "fa-solid fa-star"; dob.appendChild(i2); } clearInterval(dateInterval); }
+            }, 10);
+        }, 10);
+
+        setTimeout(function() {
+            document.getElementById('scrollBtn').classList.add('vis'); document.getElementById('scrollHint').classList.add('vis');
+            document.querySelector('.date__of__birth').style.animation = 'fadeInUp 1s ease forwards';
+        }, 300);
+
+        document.getElementById('btn__scroll').addEventListener('click', function(e) {
+            var rect = this.getBoundingClientRect(); var cx = rect.left + rect.width / 2; var cy = rect.top + rect.height / 2;
+            for (var i = 0; i < 15; i++) {
+                var heart = document.createElement('div'); heart.style.cssText = 'position:fixed;left:'+cx+'px;top:'+cy+'px;pointer-events:none;z-index:9999;';
+                heart.style.fontSize = (Math.random() * 14 + 8) + 'px'; heart.style.color = ['#fb7185','#fda4af','#e8c9a0','#f43f5e'][Math.floor(Math.random()*4)]; heart.innerHTML = '\u2665';
+                var angle = (Math.PI * 2 / 15) * i; var dist = Math.random() * 80 + 40; var dx = Math.cos(angle) * dist; var dy = Math.sin(angle) * dist;
+                document.body.appendChild(heart); heart.animate([ { transform: 'translate(0,0) scale(0)', opacity: 1 }, { transform: 'translate('+dx+'px,'+dy+'px) scale(1.2)', opacity: .8, offset: .4 }, { transform: 'translate('+(dx*1.5)+'px,'+(dy*1.5-30)+'px) scale(0)', opacity: 0 } ], { duration: 800, easing: 'cubic-bezier(.25,.46,.45,.94)', fill: 'forwards' });
+                (function(el){ setTimeout(function(){ el.remove(); }, 850); })(heart);
+            }
+        });
+
+        var reveals = document.querySelectorAll('.reveal');
+        var observer = new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('vis'); }); }, { threshold: 0.15 });
+        reveals.forEach(function(el) { observer.observe(el); });
+        var timelineItems = document.querySelectorAll('.timeline-item');
+        var timelineObserver = new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('vis'); }); }, { threshold: 0.2 });
+        timelineItems.forEach(function(el) { timelineObserver.observe(el); });
+
+        var letterText = "嗨姐 \n\n生日快乐 因为有你，这个世界变得更加有意义.\n\n自从认识你以来，一切都变了。那些曾经平凡的小事，如今都变得格外珍贵.你不需要完美——因为你现在的样子，无论优点还是缺点，都已足够让我心动.\n\n我无法承诺给你一切，但我承诺我会努力成为你值得拥有的人.\n\n最后，再偷偷说一句：如果未来的某一天，你也刚好注意到了我，那一定会是我最幸运的事情。祝你生日快乐，天天开心，永远幸福\n\n祝你生日快乐，Jes。你值得拥有世间所有的幸福。";
+        var typedEl = document.getElementById('typed-text'); var typingStarted = false; var typeIdx = 0;
+        function typeChar() {
+            if (typeIdx >= letterText.length) return; var ch = letterText[typeIdx]; var cursor = typedEl.querySelector('.cursor'); if (cursor) cursor.remove();
+            if (ch === '\n') { typedEl.innerHTML += '<br>'; } else { typedEl.innerHTML += ch; }
+            typedEl.innerHTML += '<span class="cursor"></span>'; typeIdx++;
+            var delay = ch === '.' || ch === ',' ? 110 : ch === '\n' ? 180 : 22 + Math.random() * 16; setTimeout(typeChar, delay);
+        }
+        var letterObserver = new IntersectionObserver(function(entries) { if (entries[0].isIntersecting && !typingStarted) { typingStarted = true; setTimeout(typeChar, 400); } }, { threshold: 0.3 });
+        letterObserver.observe(document.getElementById('letter'));
+
+        var lightbox = document.getElementById('lightbox'); var lbMedia = document.getElementById('lightbox-media'); var lbCaption = document.getElementById('lightbox-caption');
+        document.querySelectorAll('.photo-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                var cap = this.getAttribute('data-caption') || ''; var type = this.getAttribute('data-type') || 'image'; lbMedia.innerHTML = '';
+                if (type === 'video') { var video = this.querySelector('video'); if (video) { var clone = document.createElement('video'); clone.src = video.src; clone.autoplay = true; clone.loop = true; clone.muted = false; clone.playsInline = true; clone.controls = true; lbMedia.appendChild(clone); } }
+                else { var img = this.querySelector('img'); if (img) { var imgClone = document.createElement('img'); imgClone.src = img.src; imgClone.alt = cap; lbMedia.appendChild(imgClone); } }
+                lbCaption.textContent = cap; lightbox.classList.add('active'); document.body.style.overflow = 'hidden';
+            });
+        });
+        function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; var vid = lbMedia.querySelector('video'); if (vid) { vid.pause(); vid.src = ''; } lbMedia.innerHTML = ''; }
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+
+        var cakeArea = document.getElementById('cake-area'); var flames = document.querySelectorAll('.flame'); var blowHint = document.getElementById('blow-hint'); var wishText = document.getElementById('wish-text'); var candlesBlown = false;
+        function blowCandles() {
+            if (candlesBlown) return; candlesBlown = true; blowHint.style.opacity = '0';
+            flames.forEach(function(fl, i) { setTimeout(function() { fl.classList.add('out'); }, i * 200); });
+            setTimeout(function() { wishText.classList.add('show'); launchConfetti(); showToast('Selamat ulang tahun, Jeslyn!'); }, flames.length * 200 + 400);
+        }
+        cakeArea.addEventListener('click', blowCandles);
+        cakeArea.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); blowCandles(); } });
+
+        var cCanvas = document.getElementById('confetti-canvas'); var cCtx = cCanvas.getContext('2d'); var confettiPieces = []; var confettiActive = false;
+        function resizeConfetti() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; } resizeConfetti(); window.addEventListener('resize', resizeConfetti);
+        var confettiColors = ['#f43f5e','#fb7185','#d4a574','#e8c9a0','#f48fb1','#fff5e6','#ffcc80','#ef9a9a'];
+        function launchConfetti() {
+            confettiPieces = [];
+            for (var i = 0; i < 180; i++) { confettiPieces.push({ x: Math.random() * cCanvas.width, y: -20 - Math.random() * 400, w: 6 + Math.random() * 8, h: 4 + Math.random() * 5, color: confettiColors[Math.floor(Math.random() * confettiColors.length)], speedY: 2 + Math.random() * 4, speedX: (Math.random() - 0.5) * 3, rotation: Math.random() * Math.PI * 2, rotSpeed: (Math.random() - 0.5) * 0.15, alpha: 1 }); }
+            if (!confettiActive) { confettiActive = true; animateConfetti(); }
+        }
+        function animateConfetti() {
+            cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); var alive = false;
+            for (var i = 0; i < confettiPieces.length; i++) { var p = confettiPieces[i]; p.y += p.speedY; p.x += p.speedX; p.rotation += p.rotSpeed; p.speedY += 0.04; if (p.y > cCanvas.height + 30) p.alpha -= 0.02; if (p.alpha > 0) { alive = true; cCtx.save(); cCtx.globalAlpha = Math.max(0, p.alpha); cCtx.translate(p.x, p.y); cCtx.rotate(p.rotation); cCtx.fillStyle = p.color; cCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); cCtx.restore(); } }
+            if (alive) { requestAnimationFrame(animateConfetti); } else { confettiActive = false; cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); }
+        }
+
+        var toastEl = document.getElementById('toast'); var toastTimeout;
+        function showToast(msg) { toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(function() { toastEl.classList.remove('show'); }, 3500); }
+
+        var finaleDone = false;
+        var finaleObserver = new IntersectionObserver(function(entries) { if (entries[0].isIntersecting && !finaleDone) { finaleDone = true; setTimeout(launchConfetti, 800); } }, { threshold: 0.4 });
+        finaleObserver.observe(document.getElementById('finale'));
+
+    })();
+    </script>
+</body>
+</html>
 
     <script>
     (function() {
